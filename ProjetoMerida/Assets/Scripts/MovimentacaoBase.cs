@@ -42,19 +42,16 @@ public class MovimentacaoBase : MonoBehaviour
     }
 
     void HandleRotation()
-{
-    Vector3 horizontalDir = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-
-    // Certifique-se de que a direção está normalizada
-    if (horizontalDir.magnitude > 0.1f)
     {
-        // Inverte a direção se necessário
-        Quaternion rotation = Quaternion.LookRotation(horizontalDir.normalized, Vector3.up);
+        Vector3 horizontalDir = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
-        // Utilize Slerp para uma rotação suave
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+        if (horizontalDir.magnitude > 0.1f)
+        {
+            Quaternion rotation = Quaternion.LookRotation(horizontalDir.normalized, Vector3.up);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+        }
     }
-}
 
 
     void HandleDrag()
